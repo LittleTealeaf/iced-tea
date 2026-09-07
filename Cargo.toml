@@ -1,6 +1,6 @@
 [package]
 name = "iced-tea"
-version = "0.2.0"
+version = "1.0.0"
 edition = "2024"
 authors = ["LittleTealeaf"]
 description = "Elm Architecture (TEA) extensions, effect combinators, and component traits for Iced"
