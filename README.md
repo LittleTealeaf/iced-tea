@@ -1,6 +1,6 @@
 # iced-tea
 
-[![Crates.io](https://img.shields.io/crates/v/iced-tea.svg)](https://crates.io/crates/iced-tea)
+[![GitHub Tag](https://img.shields.io/github/v/tag/LittleTealeaf/iced-tea)](https://github.com/LittleTealeaf/iced-tea/tags)
 [![Documentation](https://img.shields.io/badge/docs-github_pages-blue.svg)](https://littletealeaf.github.io/iced-tea/iced_tea/)
 [![CI](https://github.com/LittleTealeaf/iced-tea/actions/workflows/rust.yml/badge.svg)](https://github.com/LittleTealeaf/iced-tea/actions/workflows/rust.yml)
 [![License](https://img.shields.io/badge/license-MIT%20OR%20Apache--2.0-blue.svg)](#license)
@@ -117,12 +117,18 @@ fn main() -> iced::Result {
 
 ## Installation
 
-Add `iced-tea` to your `Cargo.toml`:
+Add `iced-tea` as a git dependency to your `Cargo.toml` using the repository URL and release tag:
 
 ```toml
 [dependencies]
 iced = { version = "0.14.0", features = ["tokio"] }
-iced-tea = "0.1.0"
+iced-tea = { git = "https://github.com/LittleTealeaf/iced-tea.git", tag = "v0.1.0" }
+```
+
+Alternatively, you can add it via `cargo add`:
+
+```bash
+cargo add --git https://github.com/LittleTealeaf/iced-tea.git --tag v0.1.0 iced-tea
 ```
 
 ---
