@@ -103,15 +103,6 @@ pub trait App: Sized + 'static {
         }
     }
 
-    /// Alias for [`App::process_signal`].
-    ///
-    /// # Errors
-    ///
-    /// Returns an error if effect evaluation fails.
-    fn process_effect(&mut self, effect: Signal<Self::Message, ()>) -> anyhow::Result<Task<Self::Message>> {
-        self.process_signal(effect)
-    }
-
     /// Dispatches a message through [`App::update`] and evaluates the resulting [`Signal`].
     ///
     /// In debug builds, prints the received message.

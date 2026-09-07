@@ -88,7 +88,7 @@ fn test_process_signal_recursively_executes_message() {
     _ = res.unwrap();
     assert_eq!(app.counter, 1);
 
-    let res2 = app.process_effect(Signal::msg(AppMsg::Increment));
+    let res2 = app.process_signal(Signal::msg(AppMsg::Increment));
     _ = res2.unwrap();
     assert_eq!(app.counter, 2);
 
