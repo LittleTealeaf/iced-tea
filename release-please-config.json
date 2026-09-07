@@ -1,0 +1,10 @@
+{
+  "include-component-in-tag": false,
+  "packages": {
+    ".": {
+      "release-type": "rust",
+      "package-name": "iced-tea",
+      "include-component-in-tag": false
+    }
+  }
+}
