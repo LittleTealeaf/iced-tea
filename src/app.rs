@@ -105,16 +105,10 @@ pub trait App: Sized + 'static {
 
     /// Dispatches a message through [`App::update`] and evaluates the resulting [`Signal`].
     ///
-    /// In debug builds, prints the received message.
-    ///
     /// # Errors
     ///
     /// Returns an error if the update or resulting signal execution fails.
     fn process_message(&mut self, message: Self::Message) -> anyhow::Result<Task<Self::Message>> {
-        #[cfg(debug_assertions)]
-        {
-            println!("Msg: {message:?}");
-        }
         let signal = self.update(message)?;
         self.process_signal(signal)
     }
