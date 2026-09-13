@@ -37,7 +37,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Run Clippy
-        uses: LittleTealeaf/github-actions/cargo-clippy@05786fc5f86afa43698e871807359226d0a13705
+        uses: LittleTealeaf/github-actions/cargo-clippy@c781adacab1d80383040f78d86fcb3cbc4ca4e00
 
   test-coverage:
     name: Test Coverage
@@ -45,30 +45,8 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-      - name: Setup Rust
-        uses: actions-rust-lang/setup-rust-toolchain@166cdcfd11aee3cb47222f9ddb555ce30ddb9659 # v1.17.0
-        with:
-          components: llvm-tools
-      - name: Install Components
-        uses: taiki-e/install-action@v2
-        with:
-          tool: cargo-llvm-cov
-      - name: Run Tests with Coverage
-        run: cargo llvm-cov test --no-fail-fast --all-features --lcov --output-path lcov.info
-      - name: Upload Coverage Artifact
-        uses: actions/upload-artifact@v7
-        with:
-          name: lcov
-          path: lcov.info
-          retention-days: 1
-      - name: Format Test Coverages
-        run: |
-          awk '/SF:/{p=1; b=$0; next} p{b=b RS $0} /LF:/{f=$2} /LH:/{h=$2} /end_of_record/{if(f!=h) print b; p=0}' FS=: lcov.info > lcov_formatted.info
-          sed -i "s|$GITHUB_WORKSPACE/||g" lcov_formatted.info
-      - name: Write Coverage to Summary
-        uses: livewing/lcov-job-summary@v1.3.0
-        with:
-          lcov: lcov_formatted.info
+      - name: Run Cargo Test Coverage
+        uses: LittleTealeaf/github-actions/cargo-test-coverage@c781adacab1d80383040f78d86fcb3cbc4ca4e00
 
   audit:
     name: Audit Cargo Dependencies
