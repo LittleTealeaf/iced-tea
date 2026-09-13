@@ -28,18 +28,6 @@ jobs:
         uses: taiki-e/install-action@v2
         with:
           tool: clippy-sarif,sarif-fmt,cargo-llvm-cov
-      # - name: Install Clippy-Sarif
-      #   uses: baptiste0928/cargo-install@v3
-      #   with:
-      #     crate: clippy-sarif
-      # - name: Install Sarif-fmt
-      #   uses: baptiste0928/cargo-install@v3
-      #   with:
-      #     crate: sarif-fmt
-      # - name: Install Cargo LLMV-Cov
-      #   uses: baptiste0928/cargo-install@v3
-      #   with:
-      #     crate: cargo-llvm-cov
       - name: Build Dev
         run: cargo build --all --verbose
       - name: Run Tests
@@ -54,3 +42,19 @@ jobs:
           wait-for-processing: true
       - name: Formatting
         uses: actions-rust-lang/rustfmt@v1
+      - name: Generate Coverage Output
+        run: cargo llvm-cov test --no-fail-fast --all-features --lcov --output-path lcov_raw.info
+      - name: Format Test Coverages
+        run: |
+          awk '/SF:/{p=1; b=$0; next} p{b=b RS $0} /LF:/{f=$2} /LH:/{h=$2} /end_of_record/{if(f!=h) print b; p=0}' FS=: lcov_raw.info > lcov.info
+          sed -i "s|$GITHUB_WORKSPACE/||g" lcov.info
+      - name: Upload Coverages to Job Summary
+        uses: livewing/lcov-job-summary@v1.3.0
+        with:
+          lcov: lcov.info
+      - name: Upload Coverage Artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: lcov
+          path: lcov_raw.info
+          retention-days: 1
