@@ -37,7 +37,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Run Clippy
-        uses: LittleTealeaf/github-actions/cargo-clippy@a953104df8650f6546019a817d5aed96d92a756a
+        uses: LittleTealeaf/github-actions/cargo-clippy@2c8da212acd0ad1898eea4aa53b177ebe62f85ba
 
   test-coverage:
     name: Test Coverage
@@ -46,7 +46,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Run Cargo Test Coverage
-        uses: LittleTealeaf/github-actions/cargo-test-coverage@a953104df8650f6546019a817d5aed96d92a756a
+        uses: LittleTealeaf/github-actions/cargo-test-coverage@2c8da212acd0ad1898eea4aa53b177ebe62f85ba
 
   audit:
     name: Audit Cargo Dependencies
