@@ -1,0 +1,61 @@
+name: CI
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+permissions:
+  contents: read
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  fmt:
+    name: Format
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Setup Rust
+        uses: actions-rust-lang/setup-rust-toolchain@166cdcfd11aee3cb47222f9ddb555ce30ddb9659 # v1.17.0
+        with:
+          components: rustfmt
+      - name: Format
+        uses: actions-rust-lang/rustfmt@4066006ec54a31931b9b1fddfd38f2fdf2d27143 # v1.0.0
+  clippy:
+    name: Clippy
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Run Clippy
+        uses: LittleTealeaf/github-actions/cargo-clippy@791d2e303901075caedb4706e2ed5736616744f4
+
+  test-coverage:
+    name: Test Coverage
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Run Cargo Test Coverage
+        uses: LittleTealeaf/github-actions/cargo-test-coverage@791d2e303901075caedb4706e2ed5736616744f4
+
+  audit:
+    name: Audit Cargo Dependencies
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions-rust-lang/audit@72c09e02f132669d52284a3323acdb503cfc1a24 # v1.1.0
+        name: Audit Rust Dependencies
