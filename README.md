@@ -50,8 +50,8 @@ Extends `Model` with view rendering capabilities:
 
 ### `App`
 Connects root models or components to Iced's application loop:
-- Defines `boot`, `title`, `view`, and `update`.
-- Customizes `subscription`, `theme`, and `scale_factor`.
+- Defines `boot`, `config`, `view`, and `update`.
+- Customizes application parameters (e.g. title, theme, subscription) via `config`.
 - Features an integrated execution engine that recursively resolves batches, chains, and error handlers.
 
 ---
@@ -80,8 +80,10 @@ impl App for CounterApp {
         (Self { count: 0 }, None)
     }
 
-    fn title(&self) -> String {
-        format!("Counter: {}", self.count)
+    fn config(
+        app: iced::Application<impl iced::Program<Message = Self::Message, Theme = iced::Theme>>,
+    ) -> iced::Application<impl iced::Program<Message = Self::Message, Theme = iced::Theme>> {
+        app.title("Counter")
     }
 
     fn view(&self) -> Element<'_, Self::Message> {
@@ -109,7 +111,7 @@ impl App for CounterApp {
 }
 
 fn main() -> iced::Result {
-    CounterApp::application().run()
+    CounterApp::run()
 }
 ```
 
