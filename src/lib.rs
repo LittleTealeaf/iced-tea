@@ -33,8 +33,10 @@
 //!         (Self { count: 0 }, None)
 //!     }
 //!
-//!     fn title(&self) -> String {
-//!         format!("Counter: {}", self.count)
+//!     fn config(
+//!         app: iced::Application<impl iced::Program<Message = Self::Message, Theme = iced::Theme>>,
+//!     ) -> iced::Application<impl iced::Program<Message = Self::Message, Theme = iced::Theme>> {
+//!         app.title("Counter")
 //!     }
 //!
 //!     fn view(&self) -> Element<'_, Self::Message> {
@@ -61,7 +63,7 @@
 //! }
 //!
 //! fn main() -> iced::Result {
-//!     CounterApp::application().run()
+//!     CounterApp::run()
 //! }
 //! ```
 

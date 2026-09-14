@@ -54,6 +54,12 @@ allow_attributes_without_reason = "warn"
 iced = { version = "0.14.0", features = ["tokio"] }
 iced_futures = "0.14.0"
 anyhow = "1.0.100"
+log = {version = "0.4.34", optional = true}
+
+[features]
+default = ["logger"]
+logger = ["dep:log"]
+
 
 [dev-dependencies]
 itertools = "0.15.0"
