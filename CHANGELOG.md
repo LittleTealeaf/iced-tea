@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.1](https://github.com/LittleTealeaf/iced-tea/compare/v2.0.0...v2.0.1) (2026-09-19)
+
+
+### Bug Fixes
+
+* Fix config() parameters to include state ([#19](https://github.com/LittleTealeaf/iced-tea/issues/19)) ([a37f845](https://github.com/LittleTealeaf/iced-tea/commit/a37f8450ad15f3e650532e1101f3431b04181282))
+
 ## [2.0.0](https://github.com/LittleTealeaf/iced-tea/compare/v1.0.0...v2.0.0) (2026-09-14)
 
 
