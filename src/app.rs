@@ -21,9 +21,14 @@ pub trait App: Sized + 'static {
     fn boot() -> (Self, Option<Task<Self::Message>>);
 
     /// Configuration method to customize the [`Application`] builder (e.g. title, theme, subscriptions).
-    fn config(
-        app: Application<impl Program<Message = Self::Message, Theme = Theme>>,
-    ) -> Application<impl Program<Message = Self::Message, Theme = Theme>>;
+    fn config<P>(
+        app: Application<P>,
+    ) -> Application<impl Program<State = Self, Message = Self::Message, Theme = Theme>>
+    where
+        P: Program<State = Self, Message = Self::Message, Theme = Theme>,
+    {
+        app
+    }
 
     /// Renders the root application interface into an [`Element`].
     fn view(&self) -> Element<'_, Self::Message>;
@@ -154,9 +159,12 @@ mod tests {
             (Self::default(), None)
         }
 
-        fn config(
-            app: Application<impl Program<Message = Self::Message, Theme = Theme>>,
-        ) -> Application<impl Program<Message = Self::Message, Theme = Theme>> {
+        fn config<P>(
+            app: Application<P>,
+        ) -> Application<impl Program<State = Self, Message = Self::Message, Theme = Theme>>
+        where
+            P: Program<State = Self, Message = Self::Message, Theme = Theme>,
+        {
             app.title("Mock App")
         }
 
@@ -300,9 +308,12 @@ mod tests {
             (Self, None)
         }
 
-        fn config(
-            app: Application<impl Program<Message = Self::Message, Theme = Theme>>,
-        ) -> Application<impl Program<Message = Self::Message, Theme = Theme>> {
+        fn config<P>(
+            app: Application<P>,
+        ) -> Application<impl Program<State = Self, Message = Self::Message, Theme = Theme>>
+        where
+            P: Program<State = Self, Message = Self::Message, Theme = Theme>,
+        {
             app
         }
 

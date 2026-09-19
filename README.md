@@ -80,9 +80,12 @@ impl App for CounterApp {
         (Self { count: 0 }, None)
     }
 
-    fn config(
-        app: iced::Application<impl iced::Program<Message = Self::Message, Theme = iced::Theme>>,
-    ) -> iced::Application<impl iced::Program<Message = Self::Message, Theme = iced::Theme>> {
+    fn config<P>(
+        app: iced::Application<P>,
+    ) -> iced::Application<impl iced::Program<State = Self, Message = Self::Message, Theme = iced::Theme>>
+    where
+        P: iced::Program<State = Self, Message = Self::Message, Theme = iced::Theme>,
+    {
         app.title("Counter")
     }
 
