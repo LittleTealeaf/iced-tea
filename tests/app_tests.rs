@@ -25,9 +25,12 @@ impl App for TestApp {
         (Self::default(), None)
     }
 
-    fn config(
-        app: Application<impl Program<Message = Self::Message, Theme = Theme>>,
-    ) -> Application<impl Program<Message = Self::Message, Theme = Theme>> {
+    fn config<P>(
+        app: Application<P>,
+    ) -> Application<impl Program<State = Self, Message = Self::Message, Theme = Theme>>
+    where
+        P: Program<State = Self, Message = Self::Message, Theme = Theme>,
+    {
         app.title("Test App")
     }
 
@@ -75,9 +78,12 @@ impl App for MinimalApp {
         (Self::default(), None)
     }
 
-    fn config(
-        app: Application<impl Program<Message = Self::Message, Theme = Theme>>,
-    ) -> Application<impl Program<Message = Self::Message, Theme = Theme>> {
+    fn config<P>(
+        app: Application<P>,
+    ) -> Application<impl Program<State = Self, Message = Self::Message, Theme = Theme>>
+    where
+        P: Program<State = Self, Message = Self::Message, Theme = Theme>,
+    {
         app
     }
 
