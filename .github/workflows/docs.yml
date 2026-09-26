@@ -25,7 +25,7 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-
       - name: Build & Deploy Docs
         id: deployment
-        uses: LittleTealeaf/github-actions/cargo-doc-pages@fc00c17f2ac5588508e724282b83cf402cb1624f
+        uses: LittleTealeaf/github-actions/cargo-doc-pages@9e5c640ecd56f90b2a7d44069638e73886e6263e  # v0.2.3
+
