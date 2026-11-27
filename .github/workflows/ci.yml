@@ -46,7 +46,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Run Cargo Test Coverage
-        uses: LittleTealeaf/github-actions/cargo-test-coverage@9e5c640ecd56f90b2a7d44069638e73886e6263e  # v0.2.3
+        uses: LittleTealeaf/github-actions/cargo-test-coverage@18ab758355cd975760e8a19c4b519a1743aa5b75  # v1.0.0
 
   audit:
     name: Audit Cargo Dependencies
